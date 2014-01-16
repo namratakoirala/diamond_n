@@ -1,0 +1,82 @@
+<?php 
+/*****/
+$sliderConfig = MAGE::helper('ThemeOptions')->getThemeOptions('headerslider');
+/*****/
+$show = 0;
+if ($sliderConfig ['enabled']):
+
+  /**/
+  if ($sliderConfig['onlyhome']):
+    if (Mage::getSingleton('cms/page')->getIdentifier() == 'home'  && Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms'):
+      $show = 1;
+    endif;
+  else:
+    $show = 1;
+  endif; 
+  /**/
+
+if ($show): ?>
+<div class="header-slider-container">  
+    <div class="iosSlider">
+		<?php echo $this->getChildHtml(); ?>
+		<div class="container_12">
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('slider_accordion')->toHtml() ?>
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+	/* Header Slider Accordion */
+	  if (jQuery('#slider-accordion').length){
+		  jQuery('#slider-accordion > div.accordion-content').hide();  
+		  jQuery('#slider-accordion > h3.accordion-title').click(function(){
+				var accordion_title_check_flag = false;
+				if(jQuery(this).hasClass('active')){accordion_title_check_flag = true;}
+				
+				jQuery('#slider-accordion > h3.accordion-title').removeClass('active');
+				
+				if(accordion_title_check_flag == false){
+					jQuery(this).toggleClass('active');
+				}
+				
+				var nextDiv = jQuery(this).next();
+				var visibleSiblings = nextDiv.siblings('div:visible');
+			 
+				if (visibleSiblings.length ) {
+				  visibleSiblings.slideUp(300, function() {
+					nextDiv.slideToggle(500);
+				  });
+				} else {
+				   nextDiv.slideToggle(300);
+				}
+		  });
+	  }
+	/* Header Slider Accordion */
+	
+    jQuery('.iosSlider').iosSlider({
+      responsiveSlideWidth: true,
+      snapToChildren: true,
+      desktopClickDrag: true,
+      infiniteSlider: true,
+      navSlideSelector: '#slider-accordion .accordion-title',
+	  onSlideComplete: slideComplete,
+	  onSliderLoaded: sliderLoaded,
+      <?php if(isset($sliderConfig ['autoSlide'])): ?>autoSlide: <?php echo $sliderConfig ['autoSlide']; ?><?php endif; ?>
+      <?php if(isset($sliderConfig ['autoSlideTimer'])): ?>, autoSlideTimer: <?php echo $sliderConfig ['autoSlideTimer']; ?><?php endif; ?>
+	  <?php if(isset($sliderConfig ['autoSlideTransTimer'])): ?>, autoSlideTransTimer: <?php echo $sliderConfig ['autoSlideTransTimer']; endif; ?>
+	  <?php if(isset($sliderConfig ['startAtSlide'])): ?>, startAtSlide: <?php echo $sliderConfig ['startAtSlide']; endif; ?>
+	  <?php if(isset($sliderConfig ['desktopClickDrag'])): ?>, desktopClickDrag: <?php echo $sliderConfig ['desktopClickDrag']; endif; ?>
+	  <?php if(isset($sliderConfig ['infiniteSlider'])): ?>, infiniteSlider: <?php echo $sliderConfig ['infiniteSlider']; endif; ?>
+    });
+	
+	function slideComplete(args) {
+		jQuery('#slider-accordion .accordion-title:eq(' + args.currentSlideNumber + '):not(".active")').trigger('click');
+	}
+	function sliderLoaded(args){
+		slideComplete(args);
+	}
+  });
+</script>
+    <?php 
+  endif;
+endif;

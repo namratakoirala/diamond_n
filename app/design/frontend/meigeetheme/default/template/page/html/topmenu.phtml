@@ -1,0 +1,54 @@
+<?php
+/**
+ * Magento
+ *
+ * @category    design
+ * @package     meigeetheme_default
+ * @copyright   Copyright (c) 2012 MeigeeTeam. (http://www.meigeeteam.com)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?php 
+	$_menu = $this->getHtml('level-top');
+	$routeName = Mage::app()->getRequest()->getRouteName();  
+	$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+	
+	$navigation = MAGE::helper('ThemeOptions')->getThemeOptions('menu');
+?>
+<?php if($_menu): ?>
+<nav class="nav-container">
+    <ul class="<?php if ($navigation['type'] == 'menu_wide') echo 'nav-wide'; else echo 'nav'; ?>" id="nav">
+    	<?php if ($navigation['home'] == 1): ?><li class="homepage level-top <?php if($routeName == 'cms' && $identifier == 'home'): echo 'active'; endif; ?>"><a class="level-top" href="<?php echo $this->getUrl('') ?>"><span><?php echo $this->__('Home') ?></span></a></li><?php endif; ?>
+        <?php 
+	        echo $_menu;
+	        $custom_tab = Mage::getModel('cms/block')->load('meigee_navigation_custom_tab');
+	        $custom_tab_2 = Mage::getModel('cms/block')->load('meigee_navigation_custom_tab_2');
+	        if($custom_tab->getIsActive()) {
+	            echo '
+	            <li class="level0 level-top parent custom-block">
+	                <a href="#" class="level-top">
+	                    <span>'.$custom_tab->getTitle().'</span>
+	                </a>
+	                <div class="static-wrapper">'.$this->getLayout()->createBlock('cms/block')->setBlockId('meigee_navigation_custom_tab')->toHtml().'</div>
+	            </li>';
+	        }
+	        if($custom_tab_2->getIsActive()) {
+	            echo '
+	            <li class="level0 level-top parent custom-block">
+	                <a href="#" class="level-top">
+	                    <span>'.$custom_tab_2->getTitle().'</span>
+	                </a>
+	                <div class="static-wrapper">'.$this->getLayout()->createBlock('cms/block')->setBlockId('meigee_navigation_custom_tab_2')->toHtml().'</div>
+	            </li>';
+	        }
+        ?>
+
+    </ul>
+</nav>
+<?php endif ?>

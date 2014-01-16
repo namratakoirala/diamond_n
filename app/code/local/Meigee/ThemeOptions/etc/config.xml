@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Meigee_ThemeOptions>
+            <version>1.0.0</version>
+            <depends>
+            <!-- no dependencies -->
+            </depends>
+        </Meigee_ThemeOptions>
+    </modules> 
+	<adminhtml>
+        <layout>
+            <updates>
+                <meigeesettings>
+                    <file>meigeesettings.xml</file>
+                </meigeesettings>
+            </updates>
+        </layout>
+        <menu>
+            <meigee translate="title" module="ThemeOptions">
+                <title>Meigee</title>
+                <sort_order>9999</sort_order>
+                <children>
+                    <theme_options translate="title" module="ThemeOptions">
+                        <title>Theme Options (ver.1.1)</title>
+                        <sort_order>1</sort_order>
+                		<children>
+	                        <general_options translate="title" module="ThemeOptions">
+		                        <title>General Options</title>
+		                        <sort_order>1</sort_order>
+		                        <action>adminhtml/system_config/edit/section/meigee_general</action>
+		                    </general_options>
+		                    <productpage_options translate="title" module="ThemeOptions">
+		                        <title>Product Page Options</title>
+		                        <sort_order>2</sort_order>
+		                        <action>adminhtml/system_config/edit/section/meigee_productpage</action>
+		                    </productpage_options>
+		                    <sidebar_options translate="title" module="ThemeOptions">
+		                        <title>Sidebar Options</title>
+		                        <sort_order>3</sort_order>
+		                        <action>adminhtml/system_config/edit/section/meigee_sidebar</action>
+		                    </sidebar_options>
+		                    <headerslider_options translate="title" module="ThemeOptions">
+		                        <title>Header Slider</title>
+		                        <sort_order>4</sort_order>
+		                        <action>adminhtml/system_config/edit/section/meigee_headerslider</action>
+		                    </headerslider_options>
+                		</children>
+                    </theme_options>
+                </children>
+            </meigee>
+        </menu>
+    </adminhtml>
+	<global>		
+		<models>
+            <!-- ... -->
+            <ThemeOptions>
+                <class>Meigee_ThemeOptions_Model</class>
+            </ThemeOptions>   
+            <!-- ... -->
+        </models>
+	    <events>
+	      <adminhtml_controller_action_predispatch_start>
+	        <observers>
+	          <Meigee_ThemeOptions_observer>
+	            <type>singleton</type>
+	            <class>Meigee_ThemeOptions_Controller_Observer</class>
+	            <method>overrideTheme</method>
+	          </Meigee_ThemeOptions_observer>
+	        </observers>
+	      </adminhtml_controller_action_predispatch_start>
+	    </events>
+        <helpers>
+            <ThemeOptions>
+                <class>Meigee_ThemeOptions_Helper</class>
+            </ThemeOptions>
+        </helpers>
+	    <extraconfig />
+	    <blocks>
+	    	<meigee_themeoptions>
+                    <class>Meigee_ThemeOptions_Block</class>
+            </meigee_themeoptions>
+            <meigee_general><class>Meigee_ThemeOptions_Block</class></meigee_general>
+            <meigee_productpage><class>Meigee_ThemeOptions_Block</class></meigee_productpage>
+            <meigee_sidebar><class>Meigee_ThemeOptions_Block</class></meigee_sidebar>
+            <meigee_headerslider><class>Meigee_ThemeOptions_Block</class></meigee_headerslider>
+            <themeoptions>
+                	<class>Meigee_ThemeOptions_Block</class>
+	                <rewrite>
+		                <bestsellers>Meigee_ThemeOptions_Block_Bestsellers</bestsellers>
+		         	</rewrite>
+	        </themeoptions>
+	        <page>
+        		<rewrite>
+        			<html_topmenu>Meigee_ThemeOptions_Block_Html_Topmenu</html_topmenu>
+        		</rewrite>
+	        </page>		
+		</blocks>
+	</global>
+	<!---->
+	<default>
+		<design>
+	         <header translate="welcome" module="page">
+	             <logo_src>images/logo.png</logo_src>
+	             <welcome>Default welcome msg!</welcome>
+	         </header>
+	         <footer translate="copyright" module="page">
+	             <copyright>&amp;copy; 2012 Magento Demo Store. All Rights Reserved.</copyright>
+	         </footer>
+	     </design>
+		<meigee_general>
+			<appearance>
+				<font>2</font>
+				<default_sizes>1</default_sizes>
+				<fontsize>14</fontsize>
+				<gfont>Bitter</gfont>
+				<lineheight>20</lineheight>
+				<fontweight>100</fontweight>
+				<patern>none</patern>
+				<customcolors>0</customcolors>
+				<sitebg>fafafa</sitebg>
+				<maincolor>884c6a</maincolor>
+			</appearance>
+			<layout>
+				<sidebar>sidebar_left</sidebar>
+				<grid>grid_standard</grid>
+				<cartpage>cart_standard</cartpage>
+			</layout>
+			<customlogo>
+				<logo_status>0</logo_status>
+			</customlogo>
+			<menu>
+				<type>menu_wide</type>
+				<home>1</home>
+				<additional>1</additional>
+				<cat_button>1</cat_button>
+			</menu>
+			<otheroptions>
+				<totop>1</totop>
+				<notices>1</notices>
+				<labelnew>1</labelnew>
+			</otheroptions>
+			<lang_switcher>
+				<status>language_flags</status>
+				<label>1</label>
+			</lang_switcher>
+			<curr_switcher>
+				<status>currency_flags</status>
+				<label>1</label>
+			</curr_switcher>
+			<fancybox>
+				<fancybox_status>1</fancybox_status>
+				<fancybox_home>1</fancybox_home>
+				<fancybox_listing>1</fancybox_listing>
+			</fancybox>
+			<rollover>
+				<rollover_status>0</rollover_status>
+			</rollover>
+		</meigee_general>
+		<meigee_productpage>
+			<productpage>
+				<pagelayout>productpage_medium</pagelayout>
+				<prevnext>prevnext</prevnext>
+				<moreviews>moreviews_slider</moreviews>
+				<collateral>collateral_tabs</collateral>
+				<collateral_related>related_slider</collateral_related>
+			</productpage>
+		</meigee_productpage>
+		<meigee_sidebar>
+			<block_categories>
+				<status>1</status>
+				<option>1</option>
+				<option_2>1</option_2>
+			</block_categories>
+			<block_shop_by>
+				<status>1</status>
+				<option>1</option>
+				<option_2>1</option_2>
+			</block_shop_by>
+			<block_compare>
+				<status>1</status>
+			</block_compare>
+			<block_compared>
+				<status>1</status>
+			</block_compared>
+			<block_viewed>
+				<status>1</status>
+			</block_viewed>
+			<block_wishlist>
+				<status>1</status>
+				<option>1</option>
+			</block_wishlist>
+			<block_tags>
+				<status>1</status>
+			</block_tags>
+			<block_orders>
+				<status>1</status>
+			</block_orders>
+		</meigee_sidebar>
+		<meigee_headerslider>
+            <coin>
+                <enabled>1</enabled>
+                <onlyhome>1</onlyhome>
+                <slideshowSpeed>7000</slideshowSpeed>
+                <animationSpeed>600</animationSpeed>
+                <randomize>0</randomize>
+            </coin>
+		</meigee_headerslider>
+	</default>
+</config>

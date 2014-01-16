@@ -1,0 +1,20 @@
+<?php // Tabs
+$tweets = $this->getLatestTweets();
+?>
+<div class="tweets"></div>
+<script type='text/javascript'>
+    jQuery(function($){
+        jQuery(".tweets").tweet({
+            username: "<?php echo $tweets['twitter_username']; ?>",
+            join_text: "auto",
+            <?php if ($tweets['twitter_avatar']): echo 'avatar_size: 48,'; endif; ?>
+            count: <?php echo $tweets['tweets_count']; ?>,
+            auto_join_text_default: "we said,", 
+            auto_join_text_ed: "we",
+            auto_join_text_ing: "we were",
+            auto_join_text_reply: "we replied to",
+            auto_join_text_url: "",
+            loading_text: "loading tweets..."
+        });
+    });
+</script>

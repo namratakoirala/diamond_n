@@ -1,0 +1,54 @@
+/**
+ * Skin
+ */
+
+/*======Skin Images ======*/
+
+
+
+/*======Site Bg=======*/
+.content-wrapper{/*background-color:#fafafa;*/}
+
+/*======Skin Color #1=======*/
+aside.sidebar .block-tags .actions a,
+.catalog-product-view .box-reviews .full-review,
+.cart-table .subtotal-price .price{color:#884c6a;}
+
+button.button:hover > span,
+header#header .top-cart .block-title:hover,
+header#header .top-cart .block-title.active,
+header#header .top-cart .block-content,
+#nav > li.over,
+#nav > li.active,
+#nav ul,
+#nav div,
+.nav-wide#nav ul.level0,
+.nav-wide#nav .static-wrapper,
+.block-compare .actions a:hover,
+.block-wishlist .prev:hover,
+.block-wishlist .next:hover,
+.sorter .view-mode a.grid:hover,
+.sorter .view-mode a.list:hover,
+.sorter .sort-by a:hover,
+.sorter .limiter ul li a:hover,
+.sorter .limiter ul li a.selected,
+.toolbar-bottom .pager .pages ol li.current,
+.toolbar-bottom .pager .pages ol li:hover,
+.opc-titles .active.step-title-box .number,
+#slider-accordion .accordion-title.active,
+header#header .menu-button:hover,
+header#header .menu-button.active{background-color:#884c6a;}
+
+.nav-wide#nav ul.level0 ul{border-color:#884c6a;}
+
+
+@media only screen and (max-width: 767px){
+	header#header .nav-container > ul,
+	.meigee-tabs a:hover,
+    .meigee-tabs li.active a,
+    .meigee-tabs li.active a:hover{background-color:#884c6a;}
+}
+
+/**
+ * Skin
+ */
